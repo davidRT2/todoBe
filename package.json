@@ -9,35 +9,35 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start:win": "SET DEBUG=express-be:* & node --watch ./bin/www.js",
-    "start:dev": "DEBUG=express-be:* node --watch ./bin/www.js",
-    "start:prod": "node ./bin/www.js"
+    "start:dev": "node --env-file=.env --watch ./bin/www.js",
+    "start:prod": "node --env-file=.env ./bin/www.js"
   },
   "imports": {
     "#app": "./app.mjs",
+    "#config": "./src/config/index.mjs",
     "#src/*": "./src/*",
-    "#config/*": "./src/config/*",
     "#helper/*": "./src/helpers/*",
     "#module/*": "./src/modules/*",
     "#controller/*": "./src/controllers/*"
   },
   "dependencies": {
-    "@prisma/client": "5.10.2",
+    "@prisma/client": "5.19.1",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "debug": "~4.3.4",
-    "express": "^4.18.2",
+    "debug": "~4.3.6",
+    "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.10.0",
     "multer": "1.4.5-lts.1",
-    "yup": "^1.3.3"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.3.3"
   },
   "prisma": {
     "seed": "node prisma/seed/index.js"
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }
