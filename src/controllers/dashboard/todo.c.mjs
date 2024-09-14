@@ -21,7 +21,11 @@ TodoController.post('/', userCookie, async (req, res, next) => {
 });
 
 TodoController.put('/:id', userCookie, async (req, res, next) => {
-  const c$update = await m$todo.update({ ...req.params, ...req.body, user: req.user.name });
+  const c$update = await m$todo.update({
+    ...req.params,
+    ...req.body,
+    user: req.user.name,
+  });
   response.send(res, c$update);
 });
 

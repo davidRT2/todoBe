@@ -20,9 +20,36 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(helmet());
-app.use(cors({
-  credentials: true
-}));
+// app.use(
+//   cors({
+//     origin: '*', // Allow all origins
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Allow all HTTP methods
+//     credentials: true, // Allow credentials
+//   }),
+// );
+
+const allowedOrigins = ['http://localhost:5173'];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) {
+        // Allow requests with no origin (like mobile apps or curl)
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        // Allow the request if the origin is in the allowedOrigins array
+        return callback(null, true);
+      }
+
+      // Block requests not in allowedOrigins
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true, // Enable credentials only for allowed origins
+  }),
+);
+
 app.use(cookieParser());
 app.disable('x-powered-by');
 

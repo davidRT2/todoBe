@@ -4,10 +4,10 @@ import response from '#helper/response.mjs';
 
 import jwt from 'jsonwebtoken';
 
-const checkPermission = async (roleId = 6, targetUrl) => {
+const checkPermission = async (roleId = 4, targetUrl) => {
   const pathByRoleId = await db.access.findMany({
     where: {
-      roleId,
+      roleId: 4,
     },
     select: {
       path: true,
@@ -20,23 +20,22 @@ const checkPermission = async (roleId = 6, targetUrl) => {
 };
 
 const userAuth = async (req, res, next) => {
+  const { headers, originalUrl } = req;
+  const token = headers?.authorization?.startsWith('Bearer')
+    ? headers?.authorization?.split(' ')[1]
+    : null;
   try {
-    const { headers, originalUrl } = req;
-    const token = headers?.authorization?.startsWith('Bearer')
-      ? headers?.authorization?.split(' ')[1]
-      : null;
-
     if (!token) {
       throw new Error('Not Authenticated, No Session');
     }
 
     const decoded = jwt.verify(token, config.jwt.secret);
 
-    const isAllowed = await checkPermission(decoded.role.id, originalUrl);
+    // const isAllowed = await checkPermission(decoded.role.id, originalUrl);
 
-    if (!isAllowed) {
-      throw new Error('Not Permitted');
-    }
+    // if (!isAllowed) {
+    //   throw new Error('Not Permitted');
+    // }
 
     const user = await db.user.findUniqueOrThrow({
       where: {

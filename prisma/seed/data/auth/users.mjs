@@ -1,7 +1,15 @@
 const userData = [
   {
-    name: 'Admin',
-    role: 'admin',
+    name: 'John Doe',
+    username: 'johndoe',
+    password: 'password123', // In a real scenario, this should be hashed
+    roles: ['Admin'],
+  },
+  {
+    name: 'Jane Smith',
+    username: 'janesmith',
+    password: 'password123',
+    roles: ['User'],
   },
 ];
 

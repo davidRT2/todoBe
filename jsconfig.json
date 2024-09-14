@@ -6,7 +6,7 @@
     "resolveJsonModule": true,
     "paths": {
       "#app": ["./app.mjs"],
-      "#config": ["./src/config/index.mjs"],
+      "#config": ["./src/config/index.js"],
       "#src/*": ["./src/*"],
       "#helper/*": ["./src/helpers/*"],
       "#module/*": ["./src/modules/*"],
