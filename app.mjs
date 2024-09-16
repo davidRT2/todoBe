@@ -22,13 +22,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 // app.use(
 //   cors({
-//     origin: '*', // Allow all origins
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Allow all HTTP methods
-//     credentials: true, // Allow credentials
+//     origin: '*',
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     preflightContinue: false,
+//     optionsSuccessStatus: 204,
 //   }),
 // );
 
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['https://todo-app-self-phi.vercel.app'];
 
 app.use(
   cors({
